@@ -77,7 +77,6 @@ export const EditPost = (props) => {
                 <input type="text" onChange={imageURLChangeHandler} placeholder="Enter product image URL" className="form-input-modal" value={imageURL} />
                 <br ></br>
 
-                <p>{comment}</p>
 
                 <button onClick={editPost} className="btn btn-success form-button  modal-button" >Submit</button>
                 <button onClick={props.onClose} className="btn  btn-danger form-button  modal-button close">Close </button>

@@ -1,7 +1,7 @@
 import Button from 'react-bootstrap/Button'
 import { Link } from "react-router-dom"
 
-export const Post = (props) => {
+export const GuestPost = (props) => {
     return (
         <div className='one-item'>
             <div className="item-card">
@@ -14,7 +14,7 @@ export const Post = (props) => {
                     <p className="post-description">{props.content.slice(0,150)}....</p>
                 </div>
                 <div className="under col">
-                    <Link to={`/posts/${props.title}`}><Button className="details">Otvori objavu</Button></Link>
+                    <Link to={`/guest/${props.title}`}><Button className="details">Otvori objavu</Button></Link>
                 </div>
             </div>
         </div>

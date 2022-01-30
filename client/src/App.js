@@ -5,6 +5,8 @@ import {MainPage} from "./components/MainPage.js";
 import {Register} from "./components/Register";
 import {Listing} from "./components/Listing";
 import {PostDetails} from "./components/PostDetails";
+import {GuestListing} from "./components/guest/GuestListing";
+import {GuestPostDetails} from "./components/guest/GuestPostDetails";
 
 
 function App() {
@@ -16,6 +18,8 @@ function App() {
                 <Route path="/register" element={<Register/>}/>
                 <Route path="/login" element={<Login/>}/>
                 <Route path="/posts" element={<Listing/>}/>
+                <Route path="/guest" element={<GuestListing/>}/>
+                <Route path="/guest/:articleTitle" element={<GuestPostDetails/>}/>
                 <Route exact path="/posts/:articleTitle" element={<PostDetails/>}></Route>
             </Routes>
         </>

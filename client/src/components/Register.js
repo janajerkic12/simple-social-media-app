@@ -1,7 +1,8 @@
 
 import { useState } from "react";
 import axios from "axios";
-
+import Button from 'react-bootstrap/Button'
+import { Link } from "react-router-dom"
 
 export const Register = () => {
     const [name, setName] = useState("");
@@ -26,7 +27,7 @@ export const Register = () => {
         if (username === '' || password === '' || name === '' ) {
             setErrorMessage('Sva polja su obavezna za unos!')
         } else {
-            axios.post('http://localhost:8080/users', {
+            axios.post('http://localhost:5000/users', {
                 name: name,
                 username: username,
                 password: password,
@@ -58,6 +59,9 @@ export const Register = () => {
                     <input type="password" onChange={passwordChangeHandler} className="form-input2" placeholder="Password: " value={password} />
                     <br></br>
                     <button onClick={addUser} className="btn btn-success form-button register-button" >Register</button>
+
+                    <Link to='/login'><Button className="btn btn-primary btn-lg home-btn">Prijava</Button></Link>
+                    <Link to='/posts'><Button className="btn btn-primary btn-lg home-btn">Nastavi kao gost</Button></Link>
                 </form >
             </div>
         </>

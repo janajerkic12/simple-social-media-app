@@ -36,6 +36,7 @@ app.route("/posts")
             title: req.body.title,
             content: req.body.content,
             imageURL: req.body.imageURL,
+            comment: ""
         });
 
         newPost.save((err) => {
@@ -63,19 +64,6 @@ app.route("/posts/:postTitle")
                 res.send("Nema postova u bazi");
             } else {
                 res.send(foundPost);
-            }
-        })
-    })
-    .post((req, res) => {
-        const newPost = new Post({
-            comment: req.body.comment,
-        });
-
-        newPost.save((err) => {
-            if (err) {
-                res.send(err);
-            } else {
-                res.send("Novi komentar je uspješno unesen");
             }
         })
     })

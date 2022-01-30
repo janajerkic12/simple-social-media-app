@@ -290,9 +290,18 @@ button.details {
   text-align: justify;
 }
 
+.login-panel {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 
-
-
+.logpage-btn-reg {
+  width: 100%;
+  background: #FFAFCC;
+}
 
 
 
