@@ -28,10 +28,11 @@ export const CommentPost = (props) => {
 
     const commentPost = (e) => {
         e.preventDefault()
-        axios.put('http://localhost:5000/posts/' + props.title, {
+        axios.put('http://localhost:5000/posts/' + props.title + '/comment', {
             title: title,
             content: content,
             imageURL: imageURL,
+            comment: comment,
         })
             .then((res) => {
                 const message = res.data;
@@ -55,9 +56,6 @@ export const CommentPost = (props) => {
                 <div className="form-label form-label-modal-desc">
                     <label >{content}</label>
                 </div>
-
-               
-
 
                 <input type="text" onChange={commentChangeHandler} placeholder="Komentar" className="form-input-modal" value={comment} />
                 <br ></br>

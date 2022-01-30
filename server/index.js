@@ -16,7 +16,9 @@ const postoviSchema = {
     title: String,
     content: String,
     imageURL: String,
-    comment: String
+    comment: [{
+        type: String,
+    }],
 }
 
 const Post = mongoose.model("Post", postoviSchema);
@@ -36,7 +38,7 @@ app.route("/posts")
             title: req.body.title,
             content: req.body.content,
             imageURL: req.body.imageURL,
-            comment: ""
+            comment: []
         });
 
         newPost.save((err) => {
@@ -70,7 +72,7 @@ app.route("/posts/:postTitle")
     .put((req, res) => {
         Post.findOneAndUpdate(
             { title: req.params.postTitle },
-            { title: req.body.title, content: req.body.content, imageURL: req.body.imageURL },
+            { title: req.body.title, content: req.body.content, imageURL: req.body.imageURL, comment: req.body.comment },
             { overwrite: true },
             (err) => {
                 if (err) {
@@ -81,6 +83,18 @@ app.route("/posts/:postTitle")
             }
         )
     })
+    .put("/comment", async(req, res) => {
+        try {
+          const updatedPost = await Post.findOneAndUpdate(
+            { title: req.params.postTitle },
+            { $push: { comment: req.body.comments } },
+            { new: true }
+          );
+          res.status(200).json(updatedPost);
+        } catch (error) {
+          res.status(500).json(error);
+        }
+      })
     .patch((req, res) => {
         Post.findOneAndUpdate(
             { title: req.params.postTitle },

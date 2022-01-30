@@ -5,9 +5,11 @@ import Button from 'react-bootstrap/Button'
 import { Link } from "react-router-dom"
 
 export const Login = () => {
-
+    const [users, setUsers] = useState([]);
     const [username, setUserName] = useState("");
     const [password, setPassword] = useState("");
+    const [status, setStatus] = useState("");
+    const [role, setRole] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
     const navigate = useNavigate("");
 
@@ -18,6 +20,7 @@ export const Login = () => {
     const passwordChangeHandler = (event) => {
         setPassword(event.target.value);
     };
+
 
     const login = (e) => {
         e.preventDefault()
@@ -30,7 +33,13 @@ export const Login = () => {
                 if (message.length === 0) {
                     setErrorMessage('Nepostojeci podaci')
                 } else if(password == message[0].password) {
-                    navigate('/posts')
+                    if(role == 'user') {
+                        navigate('/posts')
+                    } else {
+                        navigate('/admin');
+                    }
+                } else if (status !== 'active') {
+                    setErrorMessage('Vas racun nije aktiviran!')
                 } else {
                     setErrorMessage("netacan unos");
                 }
@@ -40,6 +49,7 @@ export const Login = () => {
                 });
         }
     }
+
     return (
         <>
 

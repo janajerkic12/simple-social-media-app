@@ -14,7 +14,7 @@ export const GuestPost = (props) => {
                     <p className="post-description">{props.content.slice(0,150)}....</p>
                 </div>
                 <div className="under col">
-                    <Link to={`/guest/${props.title}`}><Button className="details">Otvori objavu</Button></Link>
+                    <Link to={`/posts/${props.title}`}><Button className="details">Otvori objavu</Button></Link>
                 </div>
             </div>
         </div>

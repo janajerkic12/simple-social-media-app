@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useEffect } from 'react';
 import axios from 'axios';
-import { Post } from "../Post"
+import { GuestPost } from "./GuestPost"
 import Modal from 'react-modal';
 import { AddPost } from "../AddPost"
 import Button from 'react-bootstrap/Button'
@@ -19,15 +19,18 @@ export const GuestListing = () => {
 
     const newsItems = news.map((post, i) => {
         return (
-            <Post title={post.title} content={post.content} imageURL={post.imageURL} key={i}>
+            <GuestPost title={post.title} content={post.content} imageURL={post.imageURL} key={i}>
                 <Button>Delete</Button>
-            </Post>
+            </GuestPost>
         )
     });
     return (
         <>
             {loading ? <h1>Učitavanje...</h1> : <><p className="list-titles">Postovi</p><div className='item-menu'>{newsItems}</div></>}
-
+            <Modal isOpen={modalIsOpen} onRequestClose={(() => { setModalIsOpen(false) })} style={{ overlay: { backgroundColor: "#8080805c", }, content: { marginTop: "50px", width: "750px", left: "50%", transform: "translateX(-50%)", borderRadius: "10px", overflowY: "hidden" } }} >
+                <AddPost onClose={(() => { setModalIsOpen(false) })}></AddPost>
+            </Modal>
+            <Button onClick={(() => { setModalIsOpen(true) })} className="home-btn add">Dodaj post</Button>
         </>
     )
 }
