@@ -5,17 +5,12 @@ import axios from "axios";
 
 export const Register = () => {
     const [name, setName] = useState("");
-    const [email, setEmail] = useState("");
     const [username, setUserName] = useState("");
     const [password, setPassword] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
 
     const nameChangeHandler = (event) => {
         setName(event.target.value);
-    };
-
-    const emailChangeHandler = (event) => {
-        setEmail(event.target.value);
     };
 
     const usernameChangeHandler = (event) => {
@@ -28,12 +23,11 @@ export const Register = () => {
 
     const addUser = (e) => {
         e.preventDefault()
-        if (username === '' || password === '' || name === '' || email === '') {
+        if (username === '' || password === '' || name === '' ) {
             setErrorMessage('Sva polja su obavezna za unos!')
         } else {
             axios.post('http://localhost:8080/users', {
                 name: name,
-                email: email,
                 username: username,
                 password: password,
             }).then((res) => {
@@ -58,8 +52,6 @@ export const Register = () => {
                 <h5 className="register-under">Unesite validne podatke</h5>
                 <form className="register-form">
                     <input type="text" onChange={nameChangeHandler} className="form-input1" placeholder="Ime: " value={name} />
-                    <br></br>
-                    <input type="text" onChange={emailChangeHandler} className="form-input1" placeholder="Email: " value={email} />
                     <br></br>
                     <input type="text" onChange={usernameChangeHandler} className="form-input1" placeholder="Korisničko ime:" value={username} />
                     <br></br>

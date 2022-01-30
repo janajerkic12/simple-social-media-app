@@ -16,11 +16,7 @@ const postoviSchema = {
     title: String,
     content: String,
     imageURL: String,
-    comment: [
-        {
-            content: String,
-        }
-    ]
+    comment: String
 }
 
 const Post = mongoose.model("Post", postoviSchema);
@@ -72,7 +68,7 @@ app.route("/posts/:postTitle")
     })
     .post((req, res) => {
         const newPost = new Post({
-            comment: req.body.comment.content,
+            comment: req.body.comment,
         });
 
         newPost.save((err) => {
@@ -125,10 +121,10 @@ app.route("/posts/:postTitle")
 
 const userSchema = {
     name: String,
-    email: String,
     username: String,
     password: String,
-    status: String
+    status: String,
+    role: String,
 }
 
 const User = mongoose.model("users", userSchema);
@@ -146,10 +142,10 @@ app.route("/users")
     .post((req, res) => {
         const newUser = new User({
             name: req.body.name,
-            email: req.body.email,
             username: req.body.username,
             password: req.body.password,
-            status: "user"
+            status: "active",
+            role: "user"
         });
 
         User.find({ username: req.body.username }, (err, foundUsers) => {

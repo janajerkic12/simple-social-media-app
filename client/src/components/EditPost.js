@@ -6,6 +6,7 @@ export const EditPost = (props) => {
     const [title, setTitle] = useState(props.title);
     const [content, setContent] = useState(props.content);
     const [imageURL, setImageURL] = useState(props.imageURL);
+    const [comment, setComment] = useState(props.comment);
     const navigate = useNavigate()
 
     const titleChangeHandler = (event) => {
@@ -19,14 +20,31 @@ export const EditPost = (props) => {
     const imageURLChangeHandler = (event) => {
         setImageURL(event.target.value);
     };
-
+    const commentChangeHandler = (event) => {
+        setComment(event.target.value);
+    };
 
     const editPost = (e) => {
         e.preventDefault()
-        axios.put('http://localhost:8080/posts/' + props.title, {
+        axios.put('http://localhost:5000/posts/' + props.title, {
             title: title,
             content: content,
             imageURL: imageURL,
+        })
+            .then((res) => {
+                const message = res.data;
+                console.log(message);
+                navigate('/posts')
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
+
+    const deleteComment = (e) => {
+        e.preventDefault()
+        axios.put('http://localhost:5000/posts/' + props.title, {
+            comment: "",
         })
             .then((res) => {
                 const message = res.data;
@@ -58,6 +76,8 @@ export const EditPost = (props) => {
 
                 <input type="text" onChange={imageURLChangeHandler} placeholder="Enter product image URL" className="form-input-modal" value={imageURL} />
                 <br ></br>
+
+                <p>{comment}</p>
 
                 <button onClick={editPost} className="btn btn-success form-button  modal-button" >Submit</button>
                 <button onClick={props.onClose} className="btn  btn-danger form-button  modal-button close">Close </button>

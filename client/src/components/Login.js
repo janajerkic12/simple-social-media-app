@@ -2,6 +2,8 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
+import Button from 'react-bootstrap/Button'
+import { Link } from "react-router-dom"
 
 export const Login = () => {
 
@@ -56,6 +58,8 @@ export const Login = () => {
                     <br></br>
                     <p className="errorMessage">{errorMessage}</p>
                     <button onClick={login} className="btn btn-success form-button register-button" >Login</button>
+
+                    <Link to='/register'><Button className="btn btn-primary btn-lg home-btn">Registracija</Button></Link>
                 </form >
             </div>
         </>

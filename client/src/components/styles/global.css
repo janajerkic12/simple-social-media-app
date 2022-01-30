@@ -268,6 +268,29 @@ button.details {
   text-align: justify;
 }
 
+.heading-comment--add {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.heading-comment--add label {
+  font-size: 26px;
+  margin-left: 30px;
+}
+
+.heading-comment--add .white-box.text-center img {
+  height: 50px;
+  width: 50px;
+}
+
+.form-label-modal-desc {
+  margin-bottom: 30px;
+  text-align: justify;
+}
+
+
 
 
 

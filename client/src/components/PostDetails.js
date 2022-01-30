@@ -3,14 +3,17 @@ import { useParams } from "react-router";
 import { useState } from "react";
 import { useEffect } from "react";
 import { EditPost } from "./EditPost";
-import Modal from 'react-modal';
+import { CommentPost } from "./CommentPost";
+import ModalOne from 'react-modal';
+import ModalTwo from 'react-modal';
 import Button from 'react-bootstrap/Button';
 import { useNavigate } from "react-router";
 
 export const PostDetails = () => {
     const params = useParams();
     const [item, setItem] = useState([]);
-    const [modalIsOpen, setModalIsOpen] = useState(false);
+    const [modalOneIsOpen, setModalOneIsOpen] = useState(false);
+    const [modalTwoIsOpen, setModalTwoIsOpen] = useState(false);
     const navigate = useNavigate()
     const [comment, setComment] = useState("");
 
@@ -53,14 +56,21 @@ export const PostDetails = () => {
                     </div>
                 </div>
                 <div className="detail-buttons">
-                    <Button onClick={(() => { setModalIsOpen(true) })} className="home-btn">Uredi post</Button>
+                    <Button onClick={(() => { setModalTwoIsOpen(true) })} className="home-btn">Uredi post</Button>
+                    <Button onClick={(() => { setModalOneIsOpen(true) })} className="home-btn">Komentarisi post</Button>
                     <Button onClick={deleteItem} className="home-btn delete-btn">Obriši post</Button>
                 </div>
 
             </div>
-            <Modal isOpen={modalIsOpen} onRequestClose={(() => { setModalIsOpen(false) })} style={{ overlay: { backgroundColor: "#8080805c", }, content: { marginTop: "50px", width: "700px", left: "50%", transform: "translateX(-50%)", borderRadius: "10px", opacitiy: 1, overflowY: "hidden" } }}>
-                <EditPost onClose={(() => { setModalIsOpen(false) })} title={item.title} imageURL={item.imageURL} content={item.content}></EditPost>
-            </Modal>
+
+
+            <ModalOne isOpen={modalOneIsOpen} onRequestClose={(() => { setModalOneIsOpen(false) })} style={{ overlay: { backgroundColor: "#8080805c", }, content: { marginTop: "50px", width: "700px", height: "fit-content", left: "50%", transform: "translateX(-50%)", borderRadius: "10px", opacitiy: 1, overflowY: "hidden" } }}>
+                <CommentPost onClose={(() => { setModalOneIsOpen(false) })} title={item.title} imageURL={item.imageURL} content={item.content}></CommentPost>
+            </ModalOne>
+
+            <ModalTwo isOpen={modalTwoIsOpen} onRequestClose={(() => { setModalTwoIsOpen(false) })} style={{ overlay: { backgroundColor: "#8080805c", }, content: { marginTop: "50px", width: "700px", height: "fit-content", left: "50%", transform: "translateX(-50%)", borderRadius: "10px", opacitiy: 1, overflowY: "hidden" } }}>
+                <EditPost onClose={(() => { setModalTwoIsOpen(false) })} title={item.title} imageURL={item.imageURL} content={item.content}></EditPost>
+            </ModalTwo>
         </>
     )
 }
