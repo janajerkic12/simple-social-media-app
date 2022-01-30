@@ -303,5 +303,17 @@ button.details {
   background: #FFAFCC;
 }
 
+.korisnici-uredi {
+  align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
 
+.guest-login {
+  display: flex;
+  align-items: baseline;
+  flex-direction: row-reverse;
+  justify-content: space-around;
+}
 

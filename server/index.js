@@ -8,7 +8,7 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-mongoose.connect("mongodb://127.0.0.1/posts");
+mongoose.connect("mongodb://127.0.0.1/dbinfo_88");
 mongoose.connection.on('connected', () => console.log('Connected'));
 mongoose.connection.on('error', () => console.log('Connection failed with - ',err));
 
@@ -83,18 +83,6 @@ app.route("/posts/:postTitle")
             }
         )
     })
-    .put("/comment", async(req, res) => {
-        try {
-          const updatedPost = await Post.findOneAndUpdate(
-            { title: req.params.postTitle },
-            { $push: { comment: req.body.comments } },
-            { new: true }
-          );
-          res.status(200).json(updatedPost);
-        } catch (error) {
-          res.status(500).json(error);
-        }
-      })
     .patch((req, res) => {
         Post.findOneAndUpdate(
             { title: req.params.postTitle },
@@ -191,7 +179,7 @@ app.route("/users/:username")
     .put((req, res) => {
         User.findOneAndUpdate(
             { username: req.params.username },
-            { name: req.body.name, email: req.body.email, username: req.body.username, password: req.body.password },
+            { name: req.body.name, username: req.body.username, password: req.body.password, role: req.body.role, status: req.body.status },
             { overwrite: true },
             (err) => {
                 if (err) {
@@ -201,6 +189,33 @@ app.route("/users/:username")
                 }
             }
         )
+    })
+    .post((req, res) => {
+        const newUser = new User({
+            name: req.body.name,
+            username: req.body.username,
+            password: req.body.password,
+            status: req.body.status,
+            role: req.body.role
+        });
+
+        User.find({ username: req.body.username }, (err, foundUsers) => {
+            if (err) {
+                res.send(err);
+            } else {
+                if (foundUsers.length === 0) {
+                    newUser.save((err) => {
+                        if (err) {
+                            res.send(err);
+                        } else {
+                            res.send("Korisnik uspješno dodan.");
+                        }
+                    })
+                } else {
+                    res.send("Korisnik s tim username već postoji.")
+                }
+            }
+        })
     })
     .patch((req, res) => {
         User.findOneAndUpdate(

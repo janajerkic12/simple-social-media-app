@@ -1,13 +1,12 @@
 import { useState } from 'react';
 import { useEffect } from 'react';
 import axios from 'axios';
-import { GuestPost } from "./GuestPost"
+import { Post } from "./Post"
 import Modal from 'react-modal';
-import { AddPost } from "../AddPost"
+import { AddPost } from "./AddPost"
 import Button from 'react-bootstrap/Button'
-import { Link } from "react-router-dom"
 
-export const GuestListing = () => {
+export const Listing = () => {
     const [news, setNews] = useState([]);
     const [loading, setLoading] = useState(false);
     const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -20,21 +19,18 @@ export const GuestListing = () => {
 
     const newsItems = news.map((post, i) => {
         return (
-            <GuestPost title={post.title} content={post.content} imageURL={post.imageURL} key={i}>
+            <Post title={post.title} content={post.content} imageURL={post.imageURL} key={i}>
                 <Button>Delete</Button>
-            </GuestPost>
+            </Post>
         )
     });
     return (
         <>
-            {loading ? <h1>Učitavanje...</h1> : <>
-                <div className='guest-login'><Link to='/login'><Button className="btn btn-primary btn-lg home-btn">Prijava</Button></Link>
-                <Link to='/register'><Button className="btn btn-primary btn-lg home-btn">Registracija</Button></Link>
-                <p className="list-titles">Postovi</p></div>
-                <div className='item-menu'>{newsItems}</div></>}
+            {loading ? <h1>Učitavanje...</h1> : <><p className="list-titles">Postovi</p><div className='item-menu'>{newsItems}</div></>}
             <Modal isOpen={modalIsOpen} onRequestClose={(() => { setModalIsOpen(false) })} style={{ overlay: { backgroundColor: "#8080805c", }, content: { marginTop: "50px", width: "750px", left: "50%", transform: "translateX(-50%)", borderRadius: "10px", overflowY: "hidden" } }} >
                 <AddPost onClose={(() => { setModalIsOpen(false) })}></AddPost>
             </Modal>
+            
         </>
     )
 }

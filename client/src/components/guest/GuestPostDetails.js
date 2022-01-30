@@ -23,25 +23,26 @@ export const GuestPostDetails = () => {
  
     return (
         <>
-            <div className="container details-page">
-                <div className="card-item">
-                    <div className="card-body">
-                        <div className="row detail-title">
-                            <div className="col-lg-7 col-md-7 col-sm-6">                        
-                                <h3 className="card-title title-product-detal">{item.title}</h3>
+            {item.length > 0 ? <div>
+
+                <div className="container details-page">
+                    <div className="card-item">
+                        <div className="card-body">
+                            <div className="row detail-title">
+                                <div className="col-lg-7 col-md-7 col-sm-6">                        
+                                    <h3 className="card-title title-product-detail">{item[0].title}</h3>
+                                </div>
+                                <div className="col-lg-5 col-md-5 col-sm-6">
+                                    <div className="white-box text-center"><img src={item[0].imageURL} className="img-responsive" alt="" /></div>
+                                </div>
+                                
                             </div>
-                            <div className="col-lg-5 col-md-5 col-sm-6">
-                                <div className="white-box text-center"><img src={item.imageURL} className="img-responsive" alt="" /></div>
-                            </div>
-                            
+                            <p className="product-desc">{item[0].content}</p>
                         </div>
-                        <p className="product-desc">{item.content}</p>
                     </div>
+
                 </div>
-
-            </div>
-
-
+            </div> : null}
         </>
     )
 }

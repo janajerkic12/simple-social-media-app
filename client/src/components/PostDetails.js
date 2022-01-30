@@ -22,11 +22,11 @@ export const PostDetails = () => {
     };
 
     useEffect(() => {
-        axios.get("http://localhost:5000/posts/" + params.articleTitle).then(({ data }) => setItem(data)).catch(error => console.log(error))
-    }, [params.articleTitle])
+        axios.get("http://localhost:5000/posts/" + params.postTitle).then(({ data }) => setItem(data)).catch(error => console.log(error))
+    }, [params.postTitle])
 
     const deleteItem = () => {
-        axios.delete('http://localhost:5000/posts/' + params.articleTitle)
+        axios.delete('http://localhost:5000/posts/' + params.postTitle)
             .then((res) => {
                 const message = res.data;
                 console.log(message);
@@ -71,6 +71,8 @@ export const PostDetails = () => {
             <ModalTwo isOpen={modalTwoIsOpen} onRequestClose={(() => { setModalTwoIsOpen(false) })} style={{ overlay: { backgroundColor: "#8080805c", }, content: { marginTop: "50px", width: "700px", height: "fit-content", left: "50%", transform: "translateX(-50%)", borderRadius: "10px", opacitiy: 1, overflowY: "hidden" } }}>
                 <EditPost onClose={(() => { setModalTwoIsOpen(false) })} title={item.title} imageURL={item.imageURL} content={item.content}></EditPost>
             </ModalTwo>
+      
+            
         </>
     )
 }

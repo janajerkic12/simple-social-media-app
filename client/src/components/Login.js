@@ -32,13 +32,13 @@ export const Login = () => {
                 console.log(message);
                 if (message.length === 0) {
                     setErrorMessage('Nepostojeci podaci')
-                } else if(password == message[0].password) {
-                    if(role == 'user') {
-                        navigate('/posts')
-                    } else {
-                        navigate('/admin');
-                    }
-                } else if (status !== 'active') {
+                } else if(password === message[0].password && message[0].role === 'admin') {
+                    
+                    navigate('/admin')
+                } else if (password === message[0].password && message[0].role === 'user') {
+                    navigate('/postovi')
+                }
+                 else if (message[0].status !== 'active') {
                     setErrorMessage('Vas racun nije aktiviran!')
                 } else {
                     setErrorMessage("netacan unos");

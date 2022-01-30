@@ -20,6 +20,7 @@ function App() {
                 <Route path="/register" element={<Register/>}/>
                 <Route path="/login" element={<Login/>}/>
                 <Route path="/posts" element={<Listing/>}/>
+                <Route path="/postovi" element={<Listing/>}/>
                 <Route path="/guest" element={<GuestListing/>}/>
                 <Route path="/admin" element={<AdminPanel/>}/>
                 <Route path="/admin/users" element={<UserListing/>}/>

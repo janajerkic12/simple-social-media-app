@@ -31,7 +31,7 @@ export const AddUser = (props) => {
 
     const addUser = (e) => {
         e.preventDefault()
-        axios.post('http://localhost:5000/posts', {
+        axios.post('http://localhost:5000/users', {
             name: name,
             username: username,
             password: password,

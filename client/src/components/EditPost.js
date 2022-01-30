@@ -58,28 +58,28 @@ export const EditPost = (props) => {
 
     return (
         <>
-            <h1>Edit product</h1>
+            <h1>Uredi objavu</h1>
             <form>
                 <div className="form-label">
                     <label >Title</label>
                 </div>
-                <input type="text" onChange={titleChangeHandler} placeholder="Enter product title" className="form-input-modal" value={title} />
+                <input type="text" onChange={titleChangeHandler} placeholder="Unesi naslov" className="form-input-modal" value={title} />
                 <br ></br>
                 <div className="form-label">
                     <label >Content</label>
                 </div>
-                <input type="text" onChange={contentChangeHandler} placeholder="Enter product description" className="form-input-modal" value={content} />
+                <input type="text" onChange={contentChangeHandler} placeholder="Dodaj opis" className="form-input-modal" value={content} />
                 <br ></br>
                 <div className="form-label">
                     <label >ImageURL</label>
                 </div>
 
-                <input type="text" onChange={imageURLChangeHandler} placeholder="Enter product image URL" className="form-input-modal" value={imageURL} />
+                <input type="text" onChange={imageURLChangeHandler} placeholder="Unesi sliku" className="form-input-modal" value={imageURL} />
                 <br ></br>
 
 
-                <button onClick={editPost} className="btn btn-success form-button  modal-button" >Submit</button>
-                <button onClick={props.onClose} className="btn  btn-danger form-button  modal-button close">Close </button>
+                <button onClick={editPost} className="btn btn-success form-button  modal-button" >Izmjeni</button>
+                <button onClick={props.onClose} className="btn  btn-danger form-button  modal-button close">Zatvori </button>
             </form>
         </>
     );
