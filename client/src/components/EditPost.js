@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router";
-export const EditProduct = (props) => {
+export const EditPost = (props) => {
 
     const [title, setTitle] = useState(props.title);
     const [content, setContent] = useState(props.content);
@@ -21,9 +21,9 @@ export const EditProduct = (props) => {
     };
 
 
-    const editProduct = (e) => {
+    const editPost = (e) => {
         e.preventDefault()
-        axios.put('http://localhost:8080/products/' + props.title, {
+        axios.put('http://localhost:8080/posts/' + props.title, {
             title: title,
             content: content,
             imageURL: imageURL,
@@ -31,7 +31,7 @@ export const EditProduct = (props) => {
             .then((res) => {
                 const message = res.data;
                 console.log(message);
-                navigate('/products')
+                navigate('/posts')
             })
             .catch(function (error) {
                 console.log(error);
@@ -59,7 +59,7 @@ export const EditProduct = (props) => {
                 <input type="text" onChange={imageURLChangeHandler} placeholder="Enter product image URL" className="form-input-modal" value={imageURL} />
                 <br ></br>
 
-                <button onClick={editProduct} className="btn btn-success form-button  modal-button" >Submit</button>
+                <button onClick={editPost} className="btn btn-success form-button  modal-button" >Submit</button>
                 <button onClick={props.onClose} className="btn  btn-danger form-button  modal-button close">Close </button>
             </form>
         </>

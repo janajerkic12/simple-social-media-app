@@ -10,7 +10,7 @@ import { Link } from "react-router-dom"
                 <p className="description">Uvijek imaj pristup najnovijim informacijama</p>
                 <Link to='/login'><Button className="btn btn-primary btn-lg home-btn">Prijava</Button></Link>
                 <Link to='/register'><Button className="btn btn-primary btn-lg home-btn">Registracija</Button></Link>
-                <Link to='/login'><p className="guest">Nastavi kao gost</p></Link>
+                <Link to='/posts'><p className="guest">Nastavi kao gost</p></Link>
             </object>
         </div>
         </>

@@ -14,7 +14,7 @@ export const Listing = () => {
 
     useEffect(() => {
         setLoading(true);
-        axios.get("http://localhost:8080/dbinfo_88/postovi").then(({ data }) => setNews(data)).catch(error => console.log(error)).finally(() => { setLoading(false) })
+        axios.get("http://localhost:5000/posts").then(({ data }) => setNews(data)).catch(error => console.log(error)).finally(() => { setLoading(false) })
     }, [])
 
     const newsItems = news.map((post, i) => {
@@ -26,11 +26,11 @@ export const Listing = () => {
     });
     return (
         <>
-            {loading ? <h1>Loading..</h1> : <><p className="list-titles">Products</p><div className='item-menu'>{newsItems}</div></>}
+            {loading ? <h1>Učitavanje...</h1> : <><p className="list-titles">Postovi</p><div className='item-menu'>{newsItems}</div></>}
             <Modal isOpen={modalIsOpen} onRequestClose={(() => { setModalIsOpen(false) })} style={{ overlay: { backgroundColor: "#8080805c", }, content: { marginTop: "50px", width: "750px", left: "50%", transform: "translateX(-50%)", borderRadius: "10px", overflowY: "hidden" } }} >
                 <AddPost onClose={(() => { setModalIsOpen(false) })}></AddPost>
             </Modal>
-            <Button onClick={(() => { setModalIsOpen(true) })} className="home-btn add">Add product</Button>
+            <Button onClick={(() => { setModalIsOpen(true) })} className="home-btn add">Dodaj post</Button>
         </>
     )
 }

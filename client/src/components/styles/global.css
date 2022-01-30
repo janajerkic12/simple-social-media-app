@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
 
+
 .background {
   height: 100vh;
   width: 100%;
@@ -17,7 +18,7 @@
     height: 100%;
 }
 
-.title {
+.title, .list-titles {
   font-size: 64px;
   color: #A2D2FF;
   font-weight: bold;
@@ -36,6 +37,7 @@
   border: 0;
   font-size: 18px;
   cursor: pointer;
+
 }
 
 .jumbotron {
@@ -66,10 +68,12 @@
 .navbar {
   display: flex;
   justify-content: space-around;
-  width: 50%;
-  margin-left: 50%;
-  margin-top: 2%;
+  width: 100%;
+  background: rgba(189, 224, 254, 0.1);
+  height: 50px;
+  align-items: center;
 }
+
 .navbar-item {
   color: #8078ff;
   cursor: pointer;
@@ -157,6 +161,114 @@
   margin: 5px;
   width: 50%;
 }
+
+.item-card {
+  display: flex;
+}
+
+.imageOfPost {
+  width: 30%;
+}
+
+.under {
+  width: 30%;
+  display: flex;
+  align-items: end;
+  justify-content: end;
+}
+
+.post-data {
+  width: 40%;
+}
+
+.item-menu {
+  width: 80%;
+  margin: auto;
+}
+
+.post-image {
+  width: 50%;
+  border-radius: 50%;
+}
+
+button.details {
+  width: 164px;
+  height: 48px;
+  left: 102px;
+  top: 746px;
+  background: #CDB4DB;
+  border-radius: 8px;
+  margin-right: 20px;
+  color: white;
+  margin-top: 50px;
+  border: 0;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.post-title {
+  font-size: 34px;
+  color: #A2D2FF;
+  font-weight: bold;
+}
+
+.post-description {
+  font-size: 20px;
+}
+
+.add {
+  float: right;
+  margin: 100px 20px 20px 0;
+  background-color: #FFAFCC;
+}
+
+.one-item {
+  background: rgba(189, 224, 254, 0.3);
+  border-radius: 20px;
+  margin: 50px 0;
+  padding: 20px;
+}
+
+.details-page {
+  background: rgba(255, 200, 221, 0.3);
+  border-radius: 20px;
+  margin: 20px 50px;
+  padding: 20px;
+}
+
+.img-responsive {
+  width: 200px;
+  border-radius: 50%;
+}
+
+.delete-btn {
+  background-color: #FFAFCC;
+}
+
+.detail-buttons {
+  display: flex;
+  justify-content: end;
+}
+
+.detail-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title-product-detal {
+  font-size: 56px;
+  color: #CDB4DB;
+  font-weight: bold;
+}
+
+.product-desc {
+  font-size: 18px;
+  width: 80%;
+  text-align: justify;
+}
+
+
 
 
 

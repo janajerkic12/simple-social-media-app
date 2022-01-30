@@ -8,7 +8,7 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-mongoose.connect("mongodb://127.0.0.1/dbinfo_88");
+mongoose.connect("mongodb://127.0.0.1/posts");
 mongoose.connection.on('connected', () => console.log('Connected'));
 mongoose.connection.on('error', () => console.log('Connection failed with - ',err));
 
@@ -16,10 +16,14 @@ const postoviSchema = {
     title: String,
     content: String,
     imageURL: String,
-    comment: [String]
+    comment: [
+        {
+            content: String,
+        }
+    ]
 }
 
-const Post = mongoose.model("postovi", postoviSchema);
+const Post = mongoose.model("Post", postoviSchema);
 
 app.route("/posts")
     .get((req, res) => {
@@ -35,7 +39,7 @@ app.route("/posts")
         const newPost = new Post({
             title: req.body.title,
             content: req.body.content,
-            imageURL: req.body.content,
+            imageURL: req.body.imageURL,
         });
 
         newPost.save((err) => {
@@ -58,18 +62,31 @@ app.route("/posts")
 
 app.route("/posts/:postTitle")
     .get((req, res) => {
-        Post.findOne({ title: req.params.productTitle }, (err, foundProduct) => {
+        Post.findOne({ title: req.params.postTitle }, (err, foundPost) => {
             if (err) {
                 res.send("Nema postova u bazi");
             } else {
-                res.send(foundProduct);
+                res.send(foundPost);
+            }
+        })
+    })
+    .post((req, res) => {
+        const newPost = new Post({
+            comment: req.body.comment.content,
+        });
+
+        newPost.save((err) => {
+            if (err) {
+                res.send(err);
+            } else {
+                res.send("Novi komentar je uspješno unesen");
             }
         })
     })
     .put((req, res) => {
         Post.findOneAndUpdate(
-            { title: req.params.productTitle },
-            { title: req.body.title, content: req.body.content, imageURL: req.body.imageURL, comment: [req.body.comment] },
+            { title: req.params.postTitle },
+            { title: req.body.title, content: req.body.content, imageURL: req.body.imageURL },
             { overwrite: true },
             (err) => {
                 if (err) {
@@ -82,7 +99,7 @@ app.route("/posts/:postTitle")
     })
     .patch((req, res) => {
         Post.findOneAndUpdate(
-            { title: req.params.productTitle },
+            { title: req.params.postTitle },
             { $set: req.body },
             (err) => {
                 if (err) {
@@ -95,7 +112,7 @@ app.route("/posts/:postTitle")
     })
     .delete((req, res) => {
         Post.deleteOne(
-            { title: req.params.productTitle },
+            { title: req.params.postTitle },
             (err) => {
                 if (err) {
                     res.send(err);

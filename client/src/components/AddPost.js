@@ -22,7 +22,7 @@ export const AddPost = (props) => {
 
     const addPost = (e) => {
         e.preventDefault()
-        axios.post('http://localhost:8080/posts', {
+        axios.post('http://localhost:5000/posts', {
             title: title,
             content: content,
             imageURL: imageURL,
