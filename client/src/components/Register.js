@@ -1,12 +1,22 @@
-import './styles/Registration.css'
+
 import { useState } from "react";
 import axios from "axios";
 
 
 export const Register = () => {
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
     const [username, setUserName] = useState("");
     const [password, setPassword] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
+
+    const nameChangeHandler = (event) => {
+        setName(event.target.value);
+    };
+
+    const emailChangeHandler = (event) => {
+        setEmail(event.target.value);
+    };
 
     const usernameChangeHandler = (event) => {
         setUserName(event.target.value);
@@ -18,19 +28,21 @@ export const Register = () => {
 
     const addUser = (e) => {
         e.preventDefault()
-        if (username === '' || password === '') {
-            setErrorMessage('Please fill in all fields!')
+        if (username === '' || password === '' || name === '' || email === '') {
+            setErrorMessage('Sva polja su obavezna za unos!')
         } else {
             axios.post('http://localhost:8080/users', {
+                name: name,
+                email: email,
                 username: username,
                 password: password,
             }).then((res) => {
                 const message = res.data;
                 console.log(message);
-                if (message === 'User with this username already exists') {
+                if (message === 'Korisničko ime je već u upotrebi') {
                     setErrorMessage(message)
                 } else {
-                    setErrorMessage('User added successfuly! Please log in.')
+                    setErrorMessage('Ragistracija uspjela. Molimo prijavite se.')
                 }
             })
                 .catch(function (error) {
@@ -40,14 +52,18 @@ export const Register = () => {
     }
     return (
         <>
-            <div className="background" >
+            <div className="background background-register" >
                 <p className="errorMessage">{errorMessage}</p>
-                <h1 className="register-title">Register</h1>
-                <h5 className="register-under">Please enter valid information</h5>
+                <h1 className="register-title">Registracija</h1>
+                <h5 className="register-under">Unesite validne podatke</h5>
                 <form className="register-form">
-                    <input type="text" onChange={usernameChangeHandler} className="form-input1" placeholder="Username" value={username} />
+                    <input type="text" onChange={nameChangeHandler} className="form-input1" placeholder="Ime: " value={name} />
                     <br></br>
-                    <input type="password" onChange={passwordChangeHandler} className="form-input2" placeholder="Password" value={password} />
+                    <input type="text" onChange={emailChangeHandler} className="form-input1" placeholder="Email: " value={email} />
+                    <br></br>
+                    <input type="text" onChange={usernameChangeHandler} className="form-input1" placeholder="Korisničko ime:" value={username} />
+                    <br></br>
+                    <input type="password" onChange={passwordChangeHandler} className="form-input2" placeholder="Password: " value={password} />
                     <br></br>
                     <button onClick={addUser} className="btn btn-success form-button register-button" >Register</button>
                 </form >
